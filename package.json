@@ -1,10 +1,19 @@
 {
   "name": "happy-svelte-scrollbar",
   "description": "Custom scrollbar component for Svelte",
+  "version": "1.0.0",
   "author": "Happy Inc",
+  "license": "MIT",
   "svelte": "src/index.js",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/happy-inc-tech/happy-svelte-scrollbar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/happy-inc-tech/happy-svelte-scrollbar/issues"
+  },
   "scripts": {
     "build": "rollup -c",
     "prepublishOnly": "npm run build",
@@ -12,6 +21,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^9.0.0",
+    "husky": "^4.3.0",
     "prettier": "^2.1.2",
     "prettier-plugin-svelte": "^1.4.0",
     "rollup": "^2.0.0",
@@ -24,8 +34,9 @@
     "component",
     "custom"
   ],
-  "files": [
-    "src",
-    "dist"
-  ]
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run format"
+    }
+  }
 }
