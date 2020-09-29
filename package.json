@@ -1,0 +1,31 @@
+{
+  "name": "happy-svelte-scrollbar",
+  "description": "Custom scrollbar component for Svelte",
+  "author": "Happy Inc",
+  "svelte": "src/index.js",
+  "module": "dist/index.mjs",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build",
+    "format": "prettier --write --plugin-search-dir=. ./src/**/*.{js,svelte}"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "prettier": "^2.1.2",
+    "prettier-plugin-svelte": "^1.4.0",
+    "rollup": "^2.0.0",
+    "rollup-plugin-svelte": "^6.0.0",
+    "svelte": "^3.0.0"
+  },
+  "keywords": [
+    "svelte",
+    "scrollbar",
+    "component",
+    "custom"
+  ],
+  "files": [
+    "src",
+    "dist"
+  ]
+}
