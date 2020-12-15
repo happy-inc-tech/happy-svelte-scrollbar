@@ -24,6 +24,8 @@ Near your scrollable area place a component and pass two props:
 <Scrollbar 
     observerTarget={ iChangeMyHeight } 
     scrollArea={ iAmScrollArea }
+    showArrows={ true }
+    buttonPressingMove={ 10 }
 />
 ```
 
@@ -44,6 +46,12 @@ export function happyScrollArea() {
     return divNode; // bind it with bind:this in your markup
 }
 ```
+
+Up and down arrows are available from version v1.1.0. 
+Use the `showArrows` prop to control visibility. 
+The `buttonPressingMove` prop can control 
+the speed at which the block will be scrolled by the 
+buttons. 
 
 ### Under the hood
 `happy-svelte-scrollbar` uses:

@@ -1,13 +1,18 @@
 <script>
   import Thumb from './Thumb.svelte';
+  import ScrollButton from './ScrollButton.svelte';
 
   export let className = 'scrollbar-track';
   export let wrapperElem = null;
   export let observerTarget = null;
+  export let buttonPressingMove = 5;
+  export let showArrows;
 
   let trackElem;
   let clickLock = false;
   let smooth = false;
+  let pressingUp = false;
+  let pressingDown = false;
 
   /**
    * Scrolling area when clicking on
@@ -32,6 +37,9 @@
 {#if wrapperElem}
   <div bind:this="{trackElem}" class="{className}" class:happy-scroll-track="{true}" on:click="{clickTrack}">
     {#if trackElem}
+      {#if showArrows}
+        <ScrollButton direction="up" bind:pressing="{pressingUp}" />
+      {/if}
       <Thumb
         wrapperElem="{wrapperElem}"
         trackElem="{trackElem}"
@@ -39,7 +47,14 @@
         smooth="{smooth}"
         on:lock-click="{() => (clickLock = true)}"
         on:unlock-click="{() => (clickLock = false)}"
+        pressingUp="{pressingUp}"
+        pressingDown="{pressingDown}"
+        buttonPressingMove="{buttonPressingMove}"
+        showArrows="{showArrows}"
       />
+      {#if showArrows}
+        <ScrollButton direction="down" bind:pressing="{pressingDown}" />
+      {/if}
     {/if}
   </div>
 {/if}
@@ -51,9 +66,9 @@
   }
 
   .scrollbar-track {
-    right: 15px;
-    width: 27px;
-    border-radius: 20px;
+    right: 0px;
+    width: 13px;
+    border-radius: 5px;
     box-shadow: 0 0 0 4px #dbdbdb;
     background-color: #dbdbdb;
   }

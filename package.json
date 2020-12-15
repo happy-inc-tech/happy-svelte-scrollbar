@@ -1,7 +1,7 @@
 {
   "name": "happy-svelte-scrollbar",
   "description": "Custom scrollbar component for Svelte",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Happy Inc",
   "license": "MIT",
   "svelte": "src/index.js",

@@ -7,8 +7,13 @@
   export let observerTarget = null;
   export let smooth = false;
   export let trackElem = null;
+  export let pressingUp = false;
+  export let pressingDown = false;
+  export let buttonPressingMove = 5;
+  export let showArrows;
 
   const dispatch = createEventDispatcher();
+  const heightReducer = showArrows ? 40 : 0;
 
   let thumbElem;
   let thumbHeight = '0px';
@@ -21,8 +26,8 @@
    * Calculating and setting new Height and Top of thumb
    */
   function calcThumbHeight() {
-    const maxHeight = wrapperElem.scrollHeight;
-    const visibleArea = wrapperElem.offsetHeight;
+    const maxHeight = wrapperElem.scrollHeight - heightReducer;
+    const visibleArea = wrapperElem.offsetHeight - heightReducer;
     const currentScrolled = wrapperElem.scrollTop;
     const visiblePercent = (visibleArea / maxHeight) * 100;
     const scrolledPercent = (currentScrolled / maxHeight) * 100;
@@ -84,8 +89,8 @@
    * track element
    */
   function initTrackBar() {
-    trackElem.style.top = wrapperElem.offsetTop + 'px';
-    trackElem.style.height = wrapperElem.offsetHeight + 'px';
+    trackElem.style.top = wrapperElem.offsetTop + heightReducer / 2 + 'px';
+    trackElem.style.height = wrapperElem.offsetHeight - heightReducer + 'px';
   }
 
   onMount(() => {
@@ -105,6 +110,25 @@
     window.removeEventListener('resize', initTrackBar);
     unsubscribeObserver();
   });
+
+  function buttonScrollDown(pressing) {
+    if (!pressing) return;
+    requestAnimationFrame(() => {
+      wrapperElem.scrollTop += buttonPressingMove;
+      buttonScrollDown(pressingDown);
+    });
+  }
+
+  function buttonScrollUp(pressing) {
+    if (!pressing) return;
+    requestAnimationFrame(() => {
+      wrapperElem.scrollTop -= buttonPressingMove;
+      buttonScrollUp(pressingUp);
+    });
+  }
+
+  $: buttonScrollUp(pressingUp);
+  $: buttonScrollDown(pressingDown);
 </script>
 
 <div
@@ -119,8 +143,8 @@
 <style>
   .scrollbar-thumb {
     background-color: #7cb86f;
-    width: 27px;
-    border-radius: 20px;
+    width: 13px;
+    border-radius: 5px;
     cursor: pointer;
   }
 
